@@ -3,6 +3,5 @@ import react from "@vitejs/plugin-react";
 
 export default defineConfig({
   plugins: [react()],
-  base: "./",  // 👈 שימוש בנתיב יחסי, עובד גם בלוקאל וגם ב-GitHub Pages
+  base: "/English-Learning-Games/", // 👈 חשוב ל-GitHub Pages
 });
-
