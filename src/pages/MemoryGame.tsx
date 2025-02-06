@@ -178,6 +178,7 @@ const MemoryGame: React.FC = () => {
         </Grid>
       </Box>
     </Box>
+    
   );
 };
 
