@@ -1,33 +1,15 @@
-export const questions = {
+const questions = {
     easy: [
-      {
-        question: "What is the opposite of 'big'?",
-        answers: [
-          { text: "Small", correct: true },
-          { text: "Fast", correct: false },
-          { text: "Tall", correct: false },
-        ],
-      },
+      { question: "What is the color of the sky?", answers: [{ text: "Blue", correct: true }, { text: "Green", correct: false }] },
+      { question: "How many legs does a dog have?", answers: [{ text: "Four", correct: true }, { text: "Two", correct: false }] },
     ],
     medium: [
-      {
-        question: "Which word is a synonym for 'happy'?",
-        answers: [
-          { text: "Sad", correct: false },
-          { text: "Joyful", correct: true },
-          { text: "Tired", correct: false },
-        ],
-      },
+      { question: "Which animal is known as the king of the jungle?", answers: [{ text: "Lion", correct: true }, { text: "Elephant", correct: false }] },
     ],
     hard: [
-      {
-        question: "What is the meaning of 'resilient'?",
-        answers: [
-          { text: "Able to recover quickly", correct: true },
-          { text: "Lazy", correct: false },
-          { text: "Fragile", correct: false },
-        ],
-      },
+      { question: "What is the capital of France?", answers: [{ text: "Paris", correct: true }, { text: "Rome", correct: false }] },
     ],
   };
+  
+  export default questions;
   
