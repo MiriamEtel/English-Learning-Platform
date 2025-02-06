@@ -27,36 +27,19 @@ const GameSelection: React.FC = () => {
         </Typography>
         <Grid container spacing={2} justifyContent="center" mt={3}>
           <Grid item xs={12} sm={6} md={4}>
-            <Button
-              fullWidth
-              variant="contained"
-              color="primary"
-              size="large"
-              onClick={() => navigate("/memory-game")}
-            >
+            <Button fullWidth variant="contained" color="primary" size="large" onClick={() => navigate("/memory-game")}>
               🧠 משחק זיכרון
             </Button>
           </Grid>
           <Grid item xs={12} sm={6} md={4}>
-            <Button
-              fullWidth
-              variant="contained"
-              color="secondary"
-              size="large"
-              onClick={() => navigate("/quiz-game")}
-            >
-              ❓ משחק חידון
+            <Button fullWidth variant="contained" color="success" size="large" onClick={() => navigate("/word-building")}>
+              🔤 בניית מילים
             </Button>
           </Grid>
+          {/* הוספת כפתור למשחק ההרפתקה */}
           <Grid item xs={12} sm={6} md={4}>
-            <Button
-              fullWidth
-              variant="contained"
-              color="success"
-              size="large"
-              onClick={() => navigate("/word-building")}
-            >
-              🔤 בניית מילים
+            <Button fullWidth variant="contained" color="warning" size="large" onClick={() => navigate("/adventure-start")}>
+              🏝️ משחק הרפתקה
             </Button>
           </Grid>
         </Grid>
