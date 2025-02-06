@@ -1,81 +1,67 @@
-import React, { useState, useEffect } from "react";
-import { useNavigate, useLocation } from "react-router-dom";
-import { Box, Button, Typography, Container } from "@mui/material";
-import questionsData from "../../data";
-import backgroundImage from "../../assets/images/adventure_game_bg.jpg";
+import React from "react";
+import { useLocation, useNavigate } from "react-router-dom";
+import backgroundImage from "../../assets/images/completion_bg.jpg"; // תמונת הרקע
 
-const AdventureGame: React.FC = () => {
-  const navigate = useNavigate();
+const GameCompletion: React.FC = () => {
   const location = useLocation();
-  const level = (location.state?.level || "easy") as keyof typeof questionsData;
-  const questions = questionsData[level];
-
-  const [index, setIndex] = useState(0);
-  const [score, setScore] = useState(0);
-  const [finished, setFinished] = useState(false);
-
-  const handleAnswer = (correct: boolean) => {
-    setScore(prevScore => {
-      const newScore = prevScore + (correct ? 1 : 0);
-
-      if (index < questions.length - 1) {
-        setIndex(prevIndex => prevIndex + 1);
-      } else {
-        setFinished(true);
-      }
-
-      return newScore;
-    });
-  };
-
-  // כאשר המשחק מסתיים, מבצע ניווט עם הניקוד המעודכן
-  useEffect(() => {
-    if (finished) {
-      setTimeout(() => { // עיכוב קל לודאות שהניקוד יתעדכן
-        navigate("/adventure/completion", { state: { score, total: questions.length } });
-      }, 100);
-    }
-  }, [finished, navigate, score, questions.length]);
+  const navigate = useNavigate();
+  const { score, total } = location.state || { score: 0, total: 0 };
 
   return (
-    <Box
-      sx={{
+    <div
+      style={{
         width: "100vw",
         height: "100vh",
         backgroundImage: `url(${backgroundImage})`,
         backgroundSize: "cover",
         backgroundPosition: "center",
         display: "flex",
+        flexDirection: "column",
         alignItems: "center",
         justifyContent: "center",
-        flexDirection: "column",
         textAlign: "center",
+        color: "white",
+        textShadow: "3px 3px 6px rgba(0, 0, 0, 0.7)",
       }}
     >
-      <Container
-        maxWidth="sm"
-        sx={{
-          p: 4,
-          borderRadius: 3,
+      {/* 🔹 תיבת טקסט עם רקע שקוף 🔹 */}
+      <div
+        style={{
+          backgroundColor: "rgba(0, 0, 0, 0.6)",
+          padding: "30px",
+          borderRadius: "15px",
+          boxShadow: "0px 6px 15px rgba(0, 0, 0, 0.4)",
+          maxWidth: "80%",
         }}
       >
-        <Typography variant="h2" gutterBottom>
-          {questions[index].question}
-        </Typography>
-        {questions[index].answers.map((answer, i) => (
-          <Button
-            key={i}
-            variant="contained"
-            color="primary"
-            sx={{ m: 1, fontSize: "20px", padding: "10px 20px" }}
-            onClick={() => handleAnswer(answer.correct)}
-          >
-            {answer.text}
-          </Button>
-        ))}
-      </Container>
-    </Box>
+        <h1 style={{ fontSize: "3rem", fontWeight: "bold", marginBottom: "20px", color: "#ffcc00" }}>
+          🎉 ! סיימת את המשחק 🎉
+        </h1>
+        <p style={{ fontSize: "1.8rem", fontWeight: "bold", marginBottom: "30px" }}>
+          הצלחת ב {score} מתוך {total}
+        </p>
+
+        {/* 🔹 כפתור עם אפקט hover 🔹 */}
+        <button
+          onClick={() => navigate("/")}
+          style={{
+            background: "linear-gradient(to bottom, #ffcc00, #ff9900)",
+            border: "none",
+            padding: "15px 40px",
+            fontSize: "1.5rem",
+            fontWeight: "bold",
+            color: "#333",
+            borderRadius: "30px",
+            cursor: "pointer",
+            transition: "all 0.3s ease-in-out",
+            boxShadow: "0px 5px 10px rgba(0, 0, 0, 0.3)",
+          }}
+        >
+          🔄 חזרה לדף הראשי
+        </button>
+      </div>
+    </div>
   );
 };
 
-export default AdventureGame;
+export default GameCompletion;
