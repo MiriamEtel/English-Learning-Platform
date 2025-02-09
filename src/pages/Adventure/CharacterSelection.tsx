@@ -85,7 +85,7 @@ const CharacterSelection: React.FC = () => {
           },
         }}
         disabled={!selectedHero}
-        onClick={() => navigate("/adventure-game", { state: { character: selectedHero } })}
+        onClick={() => navigate("/adventure/level-selection", { state: { character: selectedHero } })}
       >
         המשך למשחק
       </Button>

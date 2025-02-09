@@ -30,7 +30,7 @@ export default function Home() {
         }}
       >
         <Typography variant="h3" fontWeight="bold" gutterBottom>
-          המרוץ לאנגלית
+          המסע לאנגלית
         </Typography>
         <Typography variant="h6" gutterBottom>
           למדו אנגלית בצורה חווייתית ומהנה

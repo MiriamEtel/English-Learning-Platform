@@ -7,6 +7,7 @@ import AdventureStart from "./pages/Adventure/AdventureStart"; // מסך פתי�
 import AdventureGame from "./pages/Adventure/AdventureGame"; // מסך השאלות
 import GameCompletion from "./pages/Adventure/GameCompletion";
 import CharacterSelection from "./pages/Adventure/CharacterSelection";
+import LevelSelection from "./pages/Adventure/LevelSelection";
 const App: React.FC = () => {
   return (
     <BrowserRouter basename="/English-Learning-Games/">
@@ -18,6 +19,8 @@ const App: React.FC = () => {
         <Route path="/adventure-game" element={<AdventureGame />} /> {/* מסך השאלות */}
         <Route path="/adventure/completion" element={<GameCompletion />} />
         <Route path="/adventure/character-selection" element={<CharacterSelection/>}/>
+        <Route path="/adventure/level-selection" element={<LevelSelection />} />
+
       </Routes>
     </BrowserRouter>
   );
