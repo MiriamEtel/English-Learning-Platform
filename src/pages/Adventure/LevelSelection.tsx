@@ -41,7 +41,7 @@ const LevelSelection: React.FC = () => {
         {levels.map((level, index) => (
           <Box
             key={index}
-            onClick={() => navigate("/adventure-game", { state: { level: level.value } })}
+            onClick={() => navigate("/adventure/game-map", { state: { level: level.value } })}
             sx={{
               width: "350px", // 🔹 כפתורים גדולים יותר
               height: "350px",

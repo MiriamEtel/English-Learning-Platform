@@ -3,9 +3,9 @@ import { useNavigate } from "react-router-dom";
 import { Box, Typography, Button } from "@mui/material";
 import backgroundImage from "../../assets/images/character_selection_bg.jpg"; // רקע המסך
 import hero1 from "../../assets/images/hero1.png";
-import hero2 from "../../assets/images/hero2.png";
-import hero3 from "../../assets/images/hero3.png";
-import hero4 from "../../assets/images/hero 4.png";
+import hero2 from "../../assets/images/h2.png";
+import hero3 from "../../assets/images/h3.png";
+import hero4 from "../../assets/images/h4.png";
 
 const CharacterSelection: React.FC = () => {
   const navigate = useNavigate();
@@ -13,8 +13,8 @@ const CharacterSelection: React.FC = () => {
 
   const heroes = [
     { name: "מטייל", image: hero1 },
-    { name: "הרפתקן", image: hero3 },
     { name: "חוקר", image: hero2 },
+    { name: "הרפתקן", image: hero3 },
     { name: "מגלה ארצות", image: hero4 },
   ];
 

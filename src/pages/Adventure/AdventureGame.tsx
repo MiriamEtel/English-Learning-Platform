@@ -51,7 +51,9 @@ const AdventureGame: React.FC = () => {
           width: "60%",
           maxWidth: "800px",
           padding: "20px",
+          backgroundColor: "rgba(255, 255, 255, 0.8)",
           borderRadius: "15px",
+          boxShadow: "0px 4px 15px rgba(0, 0, 0, 0.3)",
         }}
       >
         <Typography variant="h4" gutterBottom sx={{ fontWeight: "bold", color: "#5A3E1B" }}>
