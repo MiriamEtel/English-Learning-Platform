@@ -1,5 +1,5 @@
 import React from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import { Box } from "@mui/material";
 import backgroundImage from "../../assets/images/level_selection_bg.jpg"; // תמונת הרקע
 import easyImage from "../../assets/images/easy.png"; // תמונת הכפתור קל
@@ -14,6 +14,13 @@ const levels = [
 
 const LevelSelection: React.FC = () => {
   const navigate = useNavigate();
+  const location = useLocation();
+  const selectedHero = location.state?.hero || "hero1"; // 🔹 מקבל את הדמות שנבחרה מהמסך הקודם
+
+  // מעבר למפת המשחק עם הדמות הנבחרת ורמת הקושי
+  const handleLevelSelect = (level: string) => {
+    navigate("/adventure/game-map", { state: { level, hero: selectedHero } });
+  };
 
   return (
     <Box
@@ -29,7 +36,6 @@ const LevelSelection: React.FC = () => {
         flexDirection: "column",
       }}
     >
-   
       {/* כפתורי רמות הקושי */}
       <Box
         sx={{
@@ -41,7 +47,7 @@ const LevelSelection: React.FC = () => {
         {levels.map((level, index) => (
           <Box
             key={index}
-            onClick={() => navigate("/adventure/game-map", { state: { level: level.value } })}
+            onClick={() => handleLevelSelect(level.value)} // 🔹 שומר על הדמות ומעביר גם את רמת הקושי
             sx={{
               width: "350px", // 🔹 כפתורים גדולים יותר
               height: "350px",

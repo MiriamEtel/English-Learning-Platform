@@ -3,20 +3,30 @@ import { useNavigate } from "react-router-dom";
 import { Box, Typography, Button } from "@mui/material";
 import backgroundImage from "../../assets/images/character_selection_bg.jpg"; // רקע המסך
 import hero1 from "../../assets/images/hero1.png";
-import hero2 from "../../assets/images/h2.png";
-import hero3 from "../../assets/images/h3.png";
-import hero4 from "../../assets/images/h4.png";
+import hero2 from "../../assets/images/hero2.png";
+import hero3 from "../../assets/images/hero3.png";
+import hero4 from "../../assets/images/hero4.png";
 
 const CharacterSelection: React.FC = () => {
   const navigate = useNavigate();
   const [selectedHero, setSelectedHero] = useState<string | null>(null);
 
   const heroes = [
-    { name: "מטייל", image: hero1 },
-    { name: "חוקר", image: hero2 },
-    { name: "הרפתקן", image: hero3 },
-    { name: "מגלה ארצות", image: hero4 },
+    { name: "hero1", displayName: "מטייל", image: hero1 },
+    { name: "hero2", displayName: "חוקר", image: hero2 },
+    { name: "hero3", displayName: "הרפתקן", image: hero3 },
+    { name: "hero4", displayName: "מגלה ארצות", image: hero4 },
   ];
+
+  const handleHeroSelection = (heroName: string) => {
+    console.log("🚀 דמות נבחרה:", heroName);
+    setSelectedHero(heroName);
+  };
+
+  const handleProceed = () => {
+    console.log("📌 נשלח לעמוד הבא עם הדמות:", selectedHero);
+    navigate("/adventure/level-selection", { state: { hero: selectedHero } });
+  };
 
   return (
     <Box
@@ -50,7 +60,7 @@ const CharacterSelection: React.FC = () => {
         {heroes.map((hero) => (
           <Box
             key={hero.name}
-            onClick={() => setSelectedHero(hero.name)}
+            onClick={() => handleHeroSelection(hero.name)}
             sx={{
               cursor: "pointer",
               border: selectedHero === hero.name ? "4px solid gold" : "4px solid transparent",
@@ -60,9 +70,9 @@ const CharacterSelection: React.FC = () => {
               "&:hover": { transform: "scale(1.1)" },
             }}
           >
-            <img src={hero.image} alt={hero.name} width="120px" />
+            <img src={hero.image} alt={hero.displayName} width="120px" />
             <Typography variant="h6" color="white" mt={1}>
-              {hero.name}
+              {hero.displayName}
             </Typography>
           </Box>
         ))}
@@ -85,7 +95,7 @@ const CharacterSelection: React.FC = () => {
           },
         }}
         disabled={!selectedHero}
-        onClick={() => navigate("/adventure/level-selection", { state: { character: selectedHero } })}
+        onClick={handleProceed}
       >
         המשך למשחק
       </Button>

@@ -4,23 +4,37 @@ import { Box, Button, Typography, Container } from "@mui/material";
 import questionsData from "../../data"; 
 import backgroundImage from "../../assets/images/adventure_game_bg.jpg"; // תמונת הרקע עם המגילה
 
+const QUESTIONS_PER_STEP = 2; // כל כמה שאלות חוזרים למפה
+
 const AdventureGame: React.FC = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const level = (location.state?.level || "easy") as keyof typeof questionsData;
+  const step = location.state?.step || 0;
+  const hero = location.state?.hero || "hero1";
   const questions = questionsData[level];
 
-  const [index, setIndex] = useState(0);
-  const [score, setScore] = useState(0);
+  const [index, setIndex] = useState(location.state?.questionIndex || 0); // שמירת ההתקדמות בשאלות
+  const [score, setScore] = useState(location.state?.score || 0);
 
   const handleAnswer = (correct: boolean) => {
+    console.log("🧐 שאלה מספר:", index + 1, "מתוך", questions.length);
+    console.log("✅ תשובה נכונה?", correct);
+    
     setScore(prevScore => {
       const newScore = correct ? prevScore + 1 : prevScore;
-      if (index < questions.length - 1) {
-        setIndex(prevIndex => prevIndex + 1);
+      const nextQuestionIndex = index + 1;
+
+      // אם סיימנו מספר מסוים של שאלות, חוזרים למפה
+      if (nextQuestionIndex % QUESTIONS_PER_STEP === 0 || nextQuestionIndex >= questions.length) {
+        console.log("📍 חזרה למפה אחרי שלב:", step);
+        navigate("/adventure/game-map", { 
+          state: { level, step, hero, score: newScore, questionIndex: nextQuestionIndex }
+        });
       } else {
-        navigate("/adventure/completion", { state: { score: newScore, total: questions.length } });
+        setIndex(nextQuestionIndex);
       }
+
       return newScore;
     });
   };
