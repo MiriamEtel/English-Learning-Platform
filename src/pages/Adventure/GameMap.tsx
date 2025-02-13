@@ -10,12 +10,12 @@ import moveSound from "../../assets/sounds/move.mp3"; // סאונד קפיצה
 
 // נקודות היעד במסלול (עכשיו נכונות יותר)
 const locations = [
-  { name: "🏡 הכפר השקט", x: 27, y: 35, message: "ברוך הבא לכפר! 😊" },
-  { name: "🏰 הטירה הקסומה", x: 42, y: 17, message: "הגעת לטירה קסומה! מה מסתתר בפנים" },
-  { name: "🌳 היער הקסום", x: 42, y: 43, message: "עצים גבוהים ולחשושים... אולי חיות יער מסתתרות פה" },
+  { name: "🏡 הכפר השקט", x: 27, y: 35, message: "ברוך הבא לכפר! האנשים כאן חייכנים 😊" },
+  { name: "🏰 הטירה הקסומה", x: 42, y: 17, message: "הגעת לטירה קסומה! מה מסתתר בפנים?" },
+  { name: "🌳 היער הקסום", x: 42, y: 43, message: "עצים גבוהים ולחשושים... אולי חיות יער מסתתרות פה!" },
   { name: "המזרקה המסתורית", x: 12, y: 70, message: "מזרקה מסתורית מפכה" },
-  { name: "💦 המפל הקסום", x: 74, y: 57, message: "מפל מבריק זורם כאן! תרגיש את רסיסי המים הקרים" },
-  { name: "🏆 שער הניצחון", x: 74, y: 16, message: "הגעת לסוף המסע! " },
+  { name: "💦 המפל הקסום", x: 74, y: 57, message: "מפל מבריק זורם כאן! תרגיש את רסיסי המים הקרים!" },
+  { name: "🏆 שער הניצחון", x: 74, y: 16, message: "הגעת לסוף המסע! תוכל להגיע לפסגה?" },
 ];
 
 const GameMap: React.FC = () => {
