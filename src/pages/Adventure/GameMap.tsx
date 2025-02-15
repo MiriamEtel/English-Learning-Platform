@@ -1,14 +1,13 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import { Box, Button, Typography } from "@mui/material";
-import mapBackground from "../../assets/images/map.jpg"; // תמונת המפה
+import mapBackground from "../../assets/images/map.jpg";
 import hero1 from "../../assets/images/hero1.png";
 import hero2 from "../../assets/images/hero2.png";
 import hero3 from "../../assets/images/hero3.png";
 import hero4 from "../../assets/images/hero4.png";
-import moveSound from "../../assets/sounds/move.mp3"; // סאונד קפיצה
+import moveSound from "../../assets/sounds/move.mp3";
 
-// נקודות היעד במסלול (עכשיו נכונות יותר)
 const locations = [
   { name: "🏡 הכפר השקט", x: 27, y: 35, message: "ברוך הבא לכפר! האנשים כאן חייכנים 😊" },
   { name: "🏰 הטירה הקסומה", x: 42, y: 17, message: "הגעת לטירה קסומה! מה מסתתר בפנים?" },
@@ -24,12 +23,12 @@ const GameMap: React.FC = () => {
   const selectedHero = location.state?.hero || "hero1";
   const difficulty = location.state?.level || "easy";
   const [currentStep, setCurrentStep] = useState(location.state?.step || 0);
-  const [posX, setPosX] = useState(locations[currentStep].x); // מתחיל במקום הנכון
+  const [posX, setPosX] = useState(locations[currentStep].x);
   const [posY, setPosY] = useState(locations[currentStep].y);
   const [isJumping, setIsJumping] = useState(false);
-  const [showMessage, setShowMessage] = useState(false); // הצגת ההודעה במקום החדש
+  const [showMessage, setShowMessage] = useState(false);
+  const [awaitingMove, setAwaitingMove] = useState(true); // מחכה ללחיצה לפני התקדמות
 
-  // מיפוי הדמויות שנבחרו
   const heroImages: Record<string, string> = {
     hero1,
     hero2,
@@ -37,16 +36,29 @@ const GameMap: React.FC = () => {
     hero4,
   };
 
+  useEffect(() => {
+    if (location.state?.step !== undefined) {
+      setAwaitingMove(true); // מחכים ללחיצה כדי לזוז
+      setCurrentStep(location.state?.step); // מבטיח שהדמות לא זזה לבד
+      setPosX(locations[location.state?.step].x);
+      setPosY(locations[location.state?.step].y);
+    }
+  }, [location.state?.step]);
+
   const handleNext = () => {
+    if (!awaitingMove) return; // אם עדיין לא חיכינו ללחיצה, לא נמשיך
+
+    setAwaitingMove(false); // מבטיח שהדמות לא תזוז פעמיים בלחיצה
+
     if (currentStep < locations.length - 1) {
       setIsJumping(true);
       setShowMessage(false);
       const audio = new Audio(moveSound);
       audio.play();
 
-      const prevLocation = locations[currentStep]; // מאיפה מתחילים
-      const nextLocation = locations[currentStep + 1]; // לאן להגיע
-      let steps = 10; // כמה קפיצות קטנות יהיו בדרך
+      const prevLocation = locations[currentStep];
+      const nextLocation = locations[currentStep + 1];
+      let steps = 10;
       let stepX = (nextLocation.x - prevLocation.x) / steps;
       let stepY = (nextLocation.y - prevLocation.y) / steps;
       let count = 0;
@@ -61,16 +73,12 @@ const GameMap: React.FC = () => {
           setIsJumping(false);
           setCurrentStep((prevStep) => prevStep + 1);
           setShowMessage(true);
-          
-          // שמירה של המיקום החדש
-          setPosX(nextLocation.x);
-          setPosY(nextLocation.y);
 
           setTimeout(() => {
             navigate("/adventure-game", {
-              state: { level: difficulty, step: currentStep + 1, hero: selectedHero },
+              state: { level: difficulty, step: currentStep + 1, hero: selectedHero, location: nextLocation.name },
             });
-          }, 2500); // שהייה של שנייה וחצי לפני מעבר לשאלה
+          }, 2000);
         }
       }, 100);
     } else {
@@ -109,10 +117,9 @@ const GameMap: React.FC = () => {
           textAlign: "center",
         }}
       >
-      הגעת ל : {locations[currentStep].name}
+        הגעת ל: {locations[currentStep].name}
       </Typography>
 
-      {/* כיתוב מעניין בכל תחנה */}
       {showMessage && (
         <Typography
           variant="h5"
@@ -140,7 +147,7 @@ const GameMap: React.FC = () => {
           left: `${posX}%`,
           top: `${posY}%`,
           transition: "top 0.2s ease-in-out, left 0.2s ease-in-out",
-          transform: isJumping ? "translateY(-15px)" : "translateY(0px)", // קפיצה קטנה כל פעם
+          transform: isJumping ? "translateY(-15px)" : "translateY(0px)",
         }}
       />
 

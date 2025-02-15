@@ -1,10 +1,27 @@
 import React, { useState } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import { Box, Button, Typography, Container } from "@mui/material";
-import questionsData from "../../data"; 
-import backgroundImage from "../../assets/images/adventure_game_bg.jpg"; // תמונת הרקע עם המגילה
+import questionsData from "../../data";
 
-const QUESTIONS_PER_STEP = 2; // כל כמה שאלות חוזרים למפה
+import villageBg from "../../assets/images/village.jpg";
+import castleBg from "../../assets/images/castle.jpg";
+import forestBg from "../../assets/images/forest.jpg";
+import fountainBg from "../../assets/images/fountain.jpg";
+import waterfallBg from "../../assets/images/waterfall.jpg";
+import victoryBg from "../../assets/images/victory.jpg";
+
+const locationBackgrounds = {
+  "🏡 הכפר השקט": villageBg,
+  "🏰 הטירה הקסומה": castleBg,
+  "🌳 היער הקסום": forestBg,
+  "המזרקה המסתורית": fountainBg,
+  "💦 המפל הקסום": waterfallBg,
+  "🏆 שער הניצחון": victoryBg,
+};
+
+
+// מספר השאלות לכל שלב לפני חזרה למפה
+const QUESTIONS_PER_STEP = 2;
 
 const AdventureGame: React.FC = () => {
   const navigate = useNavigate();
@@ -12,9 +29,13 @@ const AdventureGame: React.FC = () => {
   const level = (location.state?.level || "easy") as keyof typeof questionsData;
   const step = location.state?.step || 0;
   const hero = location.state?.hero || "hero1";
+  const currentLocation = location.state?.location || "🏡 הכפר השקט";
   const questions = questionsData[level];
 
-  const [index, setIndex] = useState(location.state?.questionIndex || 0); // שמירת ההתקדמות בשאלות
+  // קביעת הרקע לפי המיקום הנוכחי
+  const backgroundImage = locationBackgrounds[currentLocation] || "/assets/images/default_bg.jpg";
+
+  const [index, setIndex] = useState(location.state?.questionIndex || 0);
   const [score, setScore] = useState(location.state?.score || 0);
 
   const handleAnswer = (correct: boolean) => {
@@ -25,11 +46,11 @@ const AdventureGame: React.FC = () => {
       const newScore = correct ? prevScore + 1 : prevScore;
       const nextQuestionIndex = index + 1;
 
-      // אם סיימנו מספר מסוים של שאלות, חוזרים למפה
+      // לאחר שתי שאלות במיקום הנוכחי → חזרה למפה
       if (nextQuestionIndex % QUESTIONS_PER_STEP === 0 || nextQuestionIndex >= questions.length) {
         console.log("📍 חזרה למפה אחרי שלב:", step);
         navigate("/adventure/game-map", { 
-          state: { level, step, hero, score: newScore, questionIndex: nextQuestionIndex }
+          state: { level, step: step + 1, hero, location: currentLocation, score: newScore, questionIndex: nextQuestionIndex }
         });
       } else {
         setIndex(nextQuestionIndex);
@@ -55,7 +76,7 @@ const AdventureGame: React.FC = () => {
         position: "relative",
       }}
     >
-      {/* קונטיינר להצגת השאלות על המגילה */}
+      {/* קונטיינר להצגת השאלות */}
       <Box
         sx={{
           position: "absolute",
