@@ -3,5 +3,5 @@ import react from "@vitejs/plugin-react";
 
 export default defineConfig({
   plugins: [react()],
-  base: "/English-Learning-Games/", // 👈 חשוב ל-GitHub Pages
+  base: "/English-Learning-Platform/", // 👈 חשוב ל-GitHub Pages
 });
