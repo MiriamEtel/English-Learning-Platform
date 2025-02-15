@@ -11,7 +11,7 @@ import LevelSelection from "./pages/Adventure/LevelSelection";
 import GameMap from "./pages/Adventure/GameMap";
 const App: React.FC = () => {
   return (
-    <BrowserRouter basename="/English-Learning-Games/">
+    <BrowserRouter basename="/English-Learning-Platform/">
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/game-selection" element={<GameSelection />} />
