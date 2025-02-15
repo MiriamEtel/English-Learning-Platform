@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
-import { Box, Button, Typography, Container } from "@mui/material";
+import { Box, Button, Typography } from "@mui/material";
 import questionsData from "../../data";
 
 import villageBg from "../../assets/images/village.jpg";
@@ -30,7 +30,7 @@ const AdventureGame: React.FC = () => {
   const currentLocation = location.state?.location || "🏡 הכפר השקט";
   const questions = questionsData[level];
 
-  const backgroundImage = locationBackgrounds[currentLocation] || "/assets/images/default_bg.jpg";
+  const backgroundImage = locationBackgrounds[currentLocation as keyof typeof locationBackgrounds] || "/assets/images/village.jpg";
 
   const [index, setIndex] = useState(location.state?.questionIndex || 0);
   const [score, setScore] = useState(location.state?.score || 0);
@@ -38,10 +38,11 @@ const AdventureGame: React.FC = () => {
 const handleAnswer = (correct: boolean) => {
     console.log("🧐 שאלה מספר:", index + 1, "מתוך", questions.length);
     console.log("✅ תשובה נכונה?", correct);
-    
-    setScore(prevScore => {
-        const newScore = correct ? prevScore + 1 : prevScore;
-        const nextQuestionIndex = index + 1;
+    console.log("🔹 Current Score:", score);  
+    setScore((prevScore: number) => {
+      const newScore = correct ? prevScore + 1 : prevScore;
+      const nextQuestionIndex = index + 1;
+  
 
         if (nextQuestionIndex % QUESTIONS_PER_STEP === 0 || nextQuestionIndex >= questions.length) {
             console.log("📍 חזרה למפה אחרי שלב:", step);

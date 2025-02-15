@@ -6,7 +6,7 @@ const GameCompletion: React.FC = () => {
   const location = useLocation();
   const navigate = useNavigate();
   const { score, total } = location.state || { score: 0, total: 0 };
-
+  console.log("✅ Score:", score, "Total Questions:", total);
   return (
     <div
       style={{

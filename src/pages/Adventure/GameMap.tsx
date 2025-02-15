@@ -71,7 +71,7 @@ const GameMap: React.FC = () => {
             if (count >= steps) {
                 clearInterval(moveInterval);
                 setIsJumping(false);
-                setCurrentStep((prevStep) => prevStep + 1);
+                setCurrentStep((prevStep: number) => prevStep + 1);
                 setShowMessage(true);
 
                 setTimeout(() => {
@@ -131,7 +131,6 @@ const GameMap: React.FC = () => {
           borderRadius: "10px",
           fontWeight: "bold",
           textAlign: "center",
-          textAlign: "right", // 🔹 מיישר לימין
           direction: "rtl",
         }}
       >
