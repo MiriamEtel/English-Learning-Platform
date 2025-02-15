@@ -19,46 +19,52 @@ const locationBackgrounds = {
   "🏆 שער הניצחון": victoryBg,
 };
 
-
-// מספר השאלות לכל שלב לפני חזרה למפה
 const QUESTIONS_PER_STEP = 2;
 
 const AdventureGame: React.FC = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const level = (location.state?.level || "easy") as keyof typeof questionsData;
-  const step = location.state?.step || 0;
+  const step = location.state?.step || 0; // לא משנים אותו כאן!
   const hero = location.state?.hero || "hero1";
   const currentLocation = location.state?.location || "🏡 הכפר השקט";
   const questions = questionsData[level];
 
-  // קביעת הרקע לפי המיקום הנוכחי
   const backgroundImage = locationBackgrounds[currentLocation] || "/assets/images/default_bg.jpg";
 
   const [index, setIndex] = useState(location.state?.questionIndex || 0);
   const [score, setScore] = useState(location.state?.score || 0);
 
-  const handleAnswer = (correct: boolean) => {
+const handleAnswer = (correct: boolean) => {
     console.log("🧐 שאלה מספר:", index + 1, "מתוך", questions.length);
     console.log("✅ תשובה נכונה?", correct);
     
     setScore(prevScore => {
-      const newScore = correct ? prevScore + 1 : prevScore;
-      const nextQuestionIndex = index + 1;
+        const newScore = correct ? prevScore + 1 : prevScore;
+        const nextQuestionIndex = index + 1;
 
-      // לאחר שתי שאלות במיקום הנוכחי → חזרה למפה
-      if (nextQuestionIndex % QUESTIONS_PER_STEP === 0 || nextQuestionIndex >= questions.length) {
-        console.log("📍 חזרה למפה אחרי שלב:", step);
-        navigate("/adventure/game-map", { 
-          state: { level, step: step + 1, hero, location: currentLocation, score: newScore, questionIndex: nextQuestionIndex }
-        });
-      } else {
-        setIndex(nextQuestionIndex);
-      }
+        if (nextQuestionIndex % QUESTIONS_PER_STEP === 0 || nextQuestionIndex >= questions.length) {
+            console.log("📍 חזרה למפה אחרי שלב:", step);
+            navigate("/adventure/game-map", { 
+                state: { 
+                    level, 
+                    step, 
+                    hero, 
+                    location: currentLocation, 
+                    score: newScore, 
+                    questionIndex: nextQuestionIndex,
+                    totalQuestions: questions.length // 🔹 הוספת מספר השאלות!
+                }
+            });
+        } else {
+            setIndex(nextQuestionIndex);
+        }
 
-      return newScore;
+        return newScore;
     });
-  };
+};
+
+
 
   return (
     <Box
@@ -76,7 +82,6 @@ const AdventureGame: React.FC = () => {
         position: "relative",
       }}
     >
-      {/* קונטיינר להצגת השאלות */}
       <Box
         sx={{
           position: "absolute",

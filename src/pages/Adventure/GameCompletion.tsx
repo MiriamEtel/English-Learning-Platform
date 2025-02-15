@@ -38,7 +38,7 @@ const GameCompletion: React.FC = () => {
           🎉 ! סיימת את המשחק 🎉
         </h1>
         <p style={{ fontSize: "1.8rem", fontWeight: "bold", marginBottom: "30px" }}>
-          הצלחת ב {score} מתוך {total}
+          הצלחת ב {score} מתוך 12 שאלות
         </p>
 
         {/* 🔹 כפתור עם אפקט hover 🔹 */}

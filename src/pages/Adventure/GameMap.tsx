@@ -9,7 +9,8 @@ import hero4 from "../../assets/images/hero4.png";
 import moveSound from "../../assets/sounds/move.mp3";
 
 const locations = [
-  { name: "🏡 הכפר השקט", x: 27, y: 35, message: "ברוך הבא לכפר! האנשים כאן חייכנים 😊" },
+  { name: "🏡 הכפר השקט", x: 27, y: 35, message: "אנחנו יוצאים למסע ! מוכנים? " },
+  { name: "🏡 הכפר השקט", x: 27, y: 35, message: "ברוך הבא לכפר! מתרגשים לראותך " },
   { name: "🏰 הטירה הקסומה", x: 42, y: 17, message: "הגעת לטירה קסומה! מה מסתתר בפנים?" },
   { name: "🌳 היער הקסום", x: 42, y: 43, message: "עצים גבוהים ולחשושים... אולי חיות יער מסתתרות פה!" },
   { name: "המזרקה המסתורית", x: 12, y: 70, message: "מזרקה מסתורית מפכה" },
@@ -22,12 +23,12 @@ const GameMap: React.FC = () => {
   const location = useLocation();
   const selectedHero = location.state?.hero || "hero1";
   const difficulty = location.state?.level || "easy";
-  const [currentStep, setCurrentStep] = useState(location.state?.step || 0);
+  const [currentStep, setCurrentStep] = useState(location.state?.step ?? 0);
   const [posX, setPosX] = useState(locations[currentStep].x);
   const [posY, setPosY] = useState(locations[currentStep].y);
   const [isJumping, setIsJumping] = useState(false);
-  const [showMessage, setShowMessage] = useState(false);
-  const [awaitingMove, setAwaitingMove] = useState(true); // מחכה ללחיצה לפני התקדמות
+  const [showMessage, setShowMessage] = useState(true);
+  const [awaitingMove, setAwaitingMove] = useState(true); // הכפתור תמיד זמין אחרי מבחן
 
   const heroImages: Record<string, string> = {
     hero1,
@@ -38,53 +39,68 @@ const GameMap: React.FC = () => {
 
   useEffect(() => {
     if (location.state?.step !== undefined) {
-      setAwaitingMove(true); // מחכים ללחיצה כדי לזוז
-      setCurrentStep(location.state?.step); // מבטיח שהדמות לא זזה לבד
+      setCurrentStep(location.state?.step);
       setPosX(locations[location.state?.step].x);
       setPosY(locations[location.state?.step].y);
+      setAwaitingMove(true); // מאפשר לחיצה להמשך
     }
   }, [location.state?.step]);
 
   const handleNext = () => {
-    if (!awaitingMove) return; // אם עדיין לא חיכינו ללחיצה, לא נמשיך
+    if (!awaitingMove) return;
 
-    setAwaitingMove(false); // מבטיח שהדמות לא תזוז פעמיים בלחיצה
+    setAwaitingMove(false);
 
     if (currentStep < locations.length - 1) {
-      setIsJumping(true);
-      setShowMessage(false);
-      const audio = new Audio(moveSound);
-      audio.play();
+        setIsJumping(true);
+        setShowMessage(false);
+        const audio = new Audio(moveSound);
+        audio.play();
 
-      const prevLocation = locations[currentStep];
-      const nextLocation = locations[currentStep + 1];
-      let steps = 10;
-      let stepX = (nextLocation.x - prevLocation.x) / steps;
-      let stepY = (nextLocation.y - prevLocation.y) / steps;
-      let count = 0;
+        const nextLocation = locations[currentStep + 1];
+        let steps = 10;
+        let stepX = (nextLocation.x - posX) / steps;
+        let stepY = (nextLocation.y - posY) / steps;
+        let count = 0;
 
-      const moveInterval = setInterval(() => {
-        count++;
-        setPosX((prevX) => prevX + stepX);
-        setPosY((prevY) => prevY + stepY);
+        const moveInterval = setInterval(() => {
+            count++;
+            setPosX((prevX) => prevX + stepX);
+            setPosY((prevY) => prevY + stepY);
 
-        if (count >= steps) {
-          clearInterval(moveInterval);
-          setIsJumping(false);
-          setCurrentStep((prevStep) => prevStep + 1);
-          setShowMessage(true);
+            if (count >= steps) {
+                clearInterval(moveInterval);
+                setIsJumping(false);
+                setCurrentStep((prevStep) => prevStep + 1);
+                setShowMessage(true);
 
-          setTimeout(() => {
-            navigate("/adventure-game", {
-              state: { level: difficulty, step: currentStep + 1, hero: selectedHero, location: nextLocation.name },
-            });
-          }, 2000);
-        }
-      }, 100);
+                setTimeout(() => {
+                    navigate("/adventure-game", {
+                        state: { 
+                            level: difficulty, 
+                            step: currentStep + 1, 
+                            hero: selectedHero, 
+                            location: nextLocation.name,
+                            questionIndex: location.state?.questionIndex || 0, 
+                            score: location.state?.score || 0, // שמירת הציון
+                            totalQuestions: location.state?.totalQuestions || 0, // שמירת מספר השאלות
+                        },
+                    });
+                }, 1500);
+            }
+        }, 100);
     } else {
-      navigate("/adventure/completion");
+        // 🔹 כאן אנו מעבירים את הציון הסופי ומספר השאלות לדף הסיום
+        navigate("/adventure/completion", {
+            state: { 
+                score: location.state?.score || 0, 
+                totalQuestions: location.state?.totalQuestions || 0 
+            }
+        });
     }
-  };
+};
+
+
 
   return (
     <Box
@@ -115,6 +131,8 @@ const GameMap: React.FC = () => {
           borderRadius: "10px",
           fontWeight: "bold",
           textAlign: "center",
+          textAlign: "right", // 🔹 מיישר לימין
+          direction: "rtl",
         }}
       >
         הגעת ל: {locations[currentStep].name}
@@ -126,11 +144,13 @@ const GameMap: React.FC = () => {
           sx={{
             position: "absolute",
             bottom: "20%",
-            backgroundColor: "rgba(0, 0, 0, 0.7)",
+            backgroundColor: "rgba(168, 23, 23, 0.7)",
             color: "white",
             padding: "15px",
             borderRadius: "10px",
             fontWeight: "bold",
+            textAlign: "right", // 🔹 מיישר לימין
+            direction: "rtl",
           }}
         >
           {locations[currentStep].message}
