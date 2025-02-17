@@ -12,25 +12,27 @@
 
 המשחק המרכזי בפלטפורמה! אתם יוצאים למסע מרגש בעולם פנטזיה מלא הרפתקאות ואתגרים. בכל שלב תגלו מקומות קסומים חדשים, תענו על שאלות, ותתקדמו במסלול עד שתגיעו לשער הניצחון!
 
+<img src="public/screenshots/adventure_start.png" alt="מסך הפתיחה של המשחק" width="400">
+
 #### 🔹 בחירת דמות למשחק
+
 בחרו את הדמות שלכם וצאו למסע:
-<img src="public/screenshots/advanture_select_character.png" alt="בחירת דמות" width="400">
 
 #### 🔹 בחירת רמת הקושי
+
 התאימו את החוויה לרמה שלכם:
-<img src="public/screenshots/select_level.png" alt="בחירת רמה" width="400">
 
 #### 🔹 חקרו עולמות קסומים
+
 נווטו בין תחנות שונות במפה:
-<img src="public/screenshots/map.png" alt="מפת המשחק" width="400">
 
 #### 🔹 פתרו חידות ושאלות באנגלית
+
 ענו נכון כדי להתקדם במסע:
-<img src="public/screenshots/question.png" alt="שאלה לדוגמה" width="400">
 
 #### 🔹 סיימו את המסע והגיעו לשער הניצחון
+
 הוכיחו את הידע שלכם וסיימו בהצלחה!
-<img src="public/screenshots/completion.png" alt="סיום המשחק" width="400">
 
 ---
 
@@ -39,8 +41,8 @@
 משחק מהנה שמפתח את הזיכרון והאוצר המילים באנגלית! עליכם למצוא את הזוגות הנכונים - מילה באנגלית ותמונה תואמת.
 
 #### 🔹 מטרת המשחק
+
 התאימו מילים לתמונות וזכרו את המיקומים:
-<img src="public/screenshots/memory.png" alt="משחק הזיכרון" width="400">
 
 ---
 
