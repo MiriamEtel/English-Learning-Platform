@@ -72,7 +72,7 @@ const GameSelection: React.FC = () => {
           <Grid item xs={12} sm={6} md={4}>
             <Button
               fullWidth
-              onClick={() => navigate("/word-building")}
+              onClick={() => navigate("/game-coming-soon")}
               sx={{
                 background: "linear-gradient(to bottom, #16a085, #0e6b57)",
                 border: "4px solid #ffcc00",
