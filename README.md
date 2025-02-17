@@ -1,6 +1,7 @@
 # 🎮 פלטפורמה ללימוד אנגלית
 
 דרך מהנה ואינטראקטיבית ללימוד אנגלית באמצעות משחקים מרתקים! 🌟
+👉 **[לחצו כאן כדי לשחק](https://miriametel.github.io/English-Learning-Platform/)**
 
 ## 🚀 על הפלטפורמה
 
