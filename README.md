@@ -18,7 +18,8 @@
 
 #### 🔹 בחירת רמת הקושי
 התאימו את החוויה לרמה שלכם:
-![בחירת רמה](screenshots/select_level.png)
+![בחירת רמה](/public/screenshots/select_level.png)
+
 
 #### 🔹 חקרו עולמות קסומים
 נווטו בין תחנות שונות במפה:
