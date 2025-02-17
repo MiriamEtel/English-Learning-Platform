@@ -14,7 +14,9 @@
 
 #### 🔹 בחירת דמות למשחק
 בחרו את הדמות שלכם וצאו למסע:
-![בחירת דמות](screenshots/advanture_select_character.png/public)
+![בחירת דמות]
+<img src="public/screenshots/advanture_select_character.png" alt="בחירת דמות" width="400">
+
 
 #### 🔹 בחירת רמת הקושי
 התאימו את החוויה לרמה שלכם:
