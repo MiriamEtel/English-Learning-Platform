@@ -14,26 +14,23 @@
 
 #### 🔹 בחירת דמות למשחק
 בחרו את הדמות שלכם וצאו למסע:
-![בחירת דמות]
 <img src="public/screenshots/advanture_select_character.png" alt="בחירת דמות" width="400">
-
 
 #### 🔹 בחירת רמת הקושי
 התאימו את החוויה לרמה שלכם:
-![בחירת רמה](/public/screenshots/select_level.png)
-
+<img src="public/screenshots/select_level.png" alt="בחירת רמה" width="400">
 
 #### 🔹 חקרו עולמות קסומים
 נווטו בין תחנות שונות במפה:
-![מפת המשחק](screenshots/map.png)
+<img src="public/screenshots/map.png" alt="מפת המשחק" width="400">
 
 #### 🔹 פתרו חידות ושאלות באנגלית
 ענו נכון כדי להתקדם במסע:
-![שאלה לדוגמה](screenshots/question.png)
+<img src="public/screenshots/question.png" alt="שאלה לדוגמה" width="400">
 
 #### 🔹 סיימו את המסע והגיעו לשער הניצחון
 הוכיחו את הידע שלכם וסיימו בהצלחה!
-![סיום המשחק](screenshots/completion.png)
+<img src="public/screenshots/completion.png" alt="סיום המשחק" width="400">
 
 ---
 
@@ -43,7 +40,7 @@
 
 #### 🔹 מטרת המשחק
 התאימו מילים לתמונות וזכרו את המיקומים:
-![משחק הזיכרון](screenshots/memory.png)
+<img src="public/screenshots/memory.png" alt="משחק הזיכרון" width="400">
 
 ---
 
