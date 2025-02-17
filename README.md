@@ -2,7 +2,7 @@
 
 דרך מהנה ואינטראקטיבית ללימוד אנגלית באמצעות משחקים מרתקים! 🌟
 
- **[לחצו כאן כדי לשחק](https://miriametel.github.io/English-Learning-Platform/)**👉
+ **[לחצו כאן כדי לשחק](https://miriametel.github.io/English-Learning-Platform/)**
 
 ## 🚀 על הפלטפורמה
 
@@ -18,22 +18,27 @@
 
 #### 🔹 בחירת דמות למשחק
 בחרו את הדמות שלכם וצאו למסע:
+
 <img src="public/screenshots/advanture_select_character.png" alt="בחירת דמות" width="400">
 
 #### 🔹 בחירת רמת הקושי
 התאימו את החוויה לרמה שלכם:
+
 <img src="public/screenshots/select_level.png" alt="בחירת רמה" width="400">
 
 #### 🔹 חקרו עולמות קסומים
 נווטו בין תחנות שונות במפה:
+
 <img src="public/screenshots/map.png" alt="מפת המשחק" width="400">
 
 #### 🔹 פתרו חידות ושאלות באנגלית
 ענו נכון כדי להתקדם במסע:
+
 <img src="public/screenshots/question.png" alt="שאלה מהמשחק" width="400">
 
 #### 🔹 סיימו את המסע והגיעו לשער הניצחון
 הוכיחו את הידע שלכם וסיימו בהצלחה!
+
 <img src="public/screenshots/completion.png" alt="סיום המשחק" width="400">
 
 ---
@@ -44,6 +49,7 @@
 
 #### 🔹 מטרת המשחק
 התאימו מילים לתמונות וזכרו את המיקומים:
+
 <img src="public/screenshots/memory.png" alt="משחק זיכרון" width="400">
 
 ---
