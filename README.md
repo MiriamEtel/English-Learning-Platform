@@ -94,7 +94,7 @@ We welcome code contributions! You can submit pull requests or report bugs to im
 
 # 🎮 פלטפורמה ללימוד אנגלית
 
-דרך מהנה ואינטראקטיבית ללימוד אנגלית באמצעות משחקים מרתקים! 🌟
+דרך מהנה ואינטראקטיבית לדוברי עברית ללמוד אנגלית באמצעות משחקים מרתקים! 🌟
 
  **[לחצו כאן כדי לשחק](https://miriametel.github.io/English-Learning-Platform/)**
 
